@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<!-- Container -->
+<div class="row" style="padding-top:20px;">
+    <form action="." method="post" class="container padding-top-3x padding-bottom-2x">{% csrf_token %}
+      <div class="row ">
+
+        <!-- Checkout Form -->
+        <div class="col-sm-7 padding-bottom">
+          <div class="row">
+            <div class="col-sm-7">
+                <h2>Ecommerce Company</h2>
+            </div>
+            <div class="col-sm-5">
+                <ul style="list-style:none;">
+                    <li><i style="color:#77cde3;" class="material-icons">email</i> test@gmail.com</li>
+                    <li><i style="color:#77cde3;" class="material-icons">phone</i> +254 708 808 521</li>
+                    <li><i style="color:#77cde3;" class="material-icons">contact_phone</i> +254 708 808 521</li>
+                    <li><i class="material-icons" style="color:#77cde3;">pin_drop</i> My place is here</li>
+                    <li>zipcode: 02342332</li>
+                </ul>
+            </div>
+          </div><!-- .row -->
+          <h5 style="color:#77cde3;">Order Summary</h5> <hr>
+          <div class="row">
+              <div class="col-sm-12">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>No#</th>
+                          <th width="10%" height="8%;" >Image</th>                          
+                          <th>Product</th>
+                          <th>Price</th>
+                          <th>Qnt</th>
+                          <th>Amount</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                       {% for i in cart_items  %}
+                        <tr>
+                          <th scope="row">{{forloop.counter}}</th>
+                          
+                          <td>
+                            {% if i.item.image %}
+                              <img src="{{i.item.image.url}}" alt="Product">
+                            {% else %}
+                              <img src="{% static 'img/default/1.png' %}" alt="Shop item">
+                            {% endif %}
+                          </td>
+                          <td>{{i.item.product}}({{i.item}})</td>
+                          <td> {{cart.currency}} {{i.item.get_price}}</td>
+                          <td>{{i.quantity}}</td>
+                          <td>{{i.line_item_total}}</td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-sm-5 col-sm-offset-7" style="text-align:right;">
+                  <h4>Total </h4> {{object.currency}} <small style="color:#77cde3;">{{object.total}}</small>
+              </div>
+          </div>
+          
+        </div><!-- .col-sm-8 -->
+
+        <!-- Sidebar -->
+        <div class="col-md-4 col-md-offset-1 col-sm-4 padding-bottom">
+          <aside>
+            <h3>Cart total: {{object.currency}} <small style="color:#77cde3;">{{object.total}}</small></h3>
+            <p class="text-sm text-gray">* Note: This amount includes costs for shipping to address you provided.</p>
+            
+            <form id="checkout" action="." method="post" enctype="multipart/form-data">{% csrf_token %}
+                <div id="payment-form"></div><br>
+                <button id="payment" type="submit" class="btn btn-primary btn-block waves-effect waves-light space-top-none">Pay</button>
+           </form>
+            <a href="{% url 'Cart:MyCart' %}" class="btn btn-default btn-ghost icon-left btn-block">
+              <i class="material-icons arrow_back"></i>
+              Back To Cart
+            </a>
+            
+          </aside>
+        </div><!-- .col-md-3.col-sm-4 -->
+      </div><!-- .row -->
+    </form><!-- .container -->
+</div>
+<script type="text/javascript">
+    var clientToken = "{{client_token}}";
+    braintree.setup(clientToken, "dropin", {
+      container: "payment-form"
+    });
+</script>
+{% endblock %}
