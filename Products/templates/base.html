@@ -1,20 +1,21 @@
 {% load staticfiles %}
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
-  <title>Geoff Ecommerce App</title>
+  <title>Ecommerce App</title>
 
   <!--SEO Meta Tags-->
   <meta name="description" content="E-commerce App" />
   <meta name="keywords" content=" shop,buy,kenya" />
-  <meta name="author" content="Geoffrey Shibatse" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    
+
   <link rel="shortcut icon" href="{% static 'favicon.ico'%}" type="image/x-icon">
   <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
   <link href="{% static 'css/vendor/material-icons.min.css' %}" rel="stylesheet" media="screen">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,400,400italic,500,500italic">
-  
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,400,400italic,500,500italic">
+
   <script src="{% static 'js/vendor/jquery-2.1.4.min.js' %}"></script>
   <script src="https://js.braintreegateway.com/js/braintree-2.27.0.min.js"></script>
   <link href="{% static 'css/vendor/socicon.min.css' %}" rel="stylesheet" media="screen">
@@ -38,13 +39,13 @@
 
     <header class="navbar navbar-sticky">
 
-      <a href="{% url 'Products:Home' %}"  class="site-logo visible-desktop" style="color:#77cde3;">
+      <a href="{% url 'Products:Home' %}" class="site-logo visible-desktop" style="color:#77cde3;">
         <span class="text-gray">G-</span>SHOP<span></span>
       </a>
       <a href="{% url 'Products:Home' %}" class="site-logo visible-mobile" style="color:#77cde3;">
         <span class="text-gray">G-</span>SHOP<span></span>
       </a>
-      
+
       <nav class="main-navigation text-center">
         <ul class="menu">
           <li><a href="{% url 'Products:Home' %}">Home</a></li>
@@ -67,13 +68,13 @@
           <li><a href="#">FAQ</a></li>
         </ul>
       </nav>
-      
+
       <div class="toolbar">
         <div class="inner">
           <a href="#" class="mobile-menu-toggle"><i class="material-icons menu"></i></a>
-            <a href="{% url 'Products:AddUser' %}"><i class="material-icons person"></i></a>
+          <a href="{% url 'Products:AddUser' %}"><i class="material-icons person"></i></a>
           {% if request.user.is_authenticated %}<a href="#" style="font-size:1em;"> {{request.user}}</a>{% endif %}
-          
+
           <div class="cart-btn">
             <a href="{% url 'Cart:MyCart' %}">
               <i>
@@ -83,34 +84,36 @@
             </a>
             <!-- Cart Dropdown -->
             <div id="cart-dropdown" class="cart-dropdown">
-             {% if request.user.is_authenticated %}
+              {% if request.user.is_authenticated %}
               <div class="cart-item">
-                  <h5>Welcome <span style="font-size:1em;color:#e08304;" >:{{request.user}}</span>
-                  </h5>
+                <h5>Welcome <span style="font-size:1em;color:#e08304;">:{{request.user}}</span>
+                </h5>
               </div>
-              {% endif %} 
+              {% endif %}
               {% for i in cart_items %}
               <div class="cart-item">
                 <a href="{{i.item.get_absolute_url}}" class="item-thumb">
-                 {% if i.item.image %}
+                  {% if i.item.image %}
                   <img src="{{i.item.image.url}}" alt="Product">
-                {% else %}
+                  {% else %}
                   <img src="{% static 'img/default/1.png' %}" alt="Shop item">
-                {% endif %}
+                  {% endif %}
                 </a>
                 <div class="item-details">
-                  <h3 class="item-title"><a href="{{i.item.get_absolute_url}}">{{i.item.product}} <small style="color:#e08304;" >({{i.item}})</small> </a></h3>
-                  <h4 class="item-price" data-inline="{{i.line_item_total}}" >{{i.quantity}} x {{cart.currency}} {{i.item.get_price}}</h4>
+                  <h3 class="item-title"><a href="{{i.item.get_absolute_url}}">{{i.item.product}} <small
+                        style="color:#e08304;">({{i.item}})</small> </a></h3>
+                  <h4 class="item-price" data-inline="{{i.line_item_total}}">{{i.quantity}} x {{cart.currency}}
+                    {{i.item.get_price}}</h4>
                 </div>
                 <a href="#" class="close-btn">
                   <i class="material-icons close"></i>
                 </a>
               </div><!-- .cart-item -->
               {% endfor %}
-              
+
               <div class="cart-subtotal">
                 <div class="column">
-                  <span >Subtotal:</span>
+                  <span>Subtotal:</span>
                 </div>
                 <div class="column">
                   <span id="drop_amt" class="amount" style="color:#e08304;">{{cart.currency}} </span>
@@ -126,21 +129,23 @@
       <div class="col-md-6 col-md-offset-4">
         <div class="row">
           {% for message in messages %}
-           <div class="container-fluid">
-               {% if message.tags == 'success' %} 
-                <div class="col-sm-2" style="background: #63D3E9;width: 60px;height: 50px;color:#fff;" ><i class="material-icons" style="font-size:2em;padding-top:10px;text-align: center;">thumb_up</i></div>
-                <div class="col-sm-10" style="color:#fff;background:#c6f3fb;height: 50px;" >{{message}}</div>
-                {% else %} 
-                <div class="col-sm-2 " style="background:#f36a5a;width: 60px;height: 50px;color:#fff;" ><i class="material-icons"style="font-size:2em;padding-top:10px;text-align: center;">warning</i></div>
-                <div class="col-sm-10" style="color:#fff;background-color:#ffb5ad;height: 50px;" >{{message}}</div>
-                {% endif %}
-           </div>
-           {% endfor %}
-        </div> 
-      </div>     
+          <div class="container-fluid">
+            {% if message.tags == 'success' %}
+            <div class="col-sm-2" style="background: #63D3E9;width: 60px;height: 50px;color:#fff;"><i
+                class="material-icons" style="font-size:2em;padding-top:10px;text-align: center;">thumb_up</i></div>
+            <div class="col-sm-10" style="color:#fff;background:#c6f3fb;height: 50px;">{{message}}</div>
+            {% else %}
+            <div class="col-sm-2 " style="background:#f36a5a;width: 60px;height: 50px;color:#fff;"><i
+                class="material-icons" style="font-size:2em;padding-top:10px;text-align: center;">warning</i></div>
+            <div class="col-sm-10" style="color:#fff;background-color:#ffb5ad;height: 50px;">{{message}}</div>
+            {% endif %}
+          </div>
+          {% endfor %}
+        </div>
+      </div>
     </div>
     {% endif %}
-    
+
     {% block content %}
     <!-- Shop Catalog -->
     <section class="container-fluid padding-top-3x padding-bottom-3x">
@@ -149,7 +154,7 @@
         <i class="material-icons filter_list"></i>
       </div>
 
-<!--      <h1 class="space-top-half">{{title}}</h1>-->
+      <!--      <h1 class="space-top-half">{{title}}</h1>-->
       <div class="row padding-top">
 
         <div class="col-lg-2 col-md-3 col-sm-4">
@@ -164,7 +169,7 @@
                   {% for i in categories %}
                   <li><a href="{{i.get_absolute_url}}">{{i.title}} </a></li>
                   {% endfor %}
-                  
+
                 </ul>
               </div>
 
@@ -172,50 +177,51 @@
                 <h3 class="widget-title">Sort By</h3>
                 <ul>
                   <li class="active"><a href="#">
-                    <i class="material-icons sort"></i>
-                    Default
-                  </a></li>
+                      <i class="material-icons sort"></i>
+                      Default
+                    </a></li>
                   <li><a href="#">
-                    <i class="material-icons favorite_border"></i>
-                    Popularity
-                  </a></li>
+                      <i class="material-icons favorite_border"></i>
+                      Popularity
+                    </a></li>
                   <li><a href="#">
-                    <i class="material-icons vertical_align_top"></i>
-                    Last entries
-                  </a></li>
+                      <i class="material-icons vertical_align_top"></i>
+                      Last entries
+                    </a></li>
                   <li><a href="#">
-                    <i class="material-icons star_border"></i>
-                    Avarage rating
-                  </a></li>
+                      <i class="material-icons star_border"></i>
+                      Avarage rating
+                    </a></li>
                   <li><a href="#">
-                    <i class="material-icons sort_by_alpha"></i>
-                    Alphabetically
-                  </a></li>
+                      <i class="material-icons sort_by_alpha"></i>
+                      Alphabetically
+                    </a></li>
                 </ul>
               </div>
 
-              
-             <div class="widget widget-catesgories">
+
+              <div class="widget widget-catesgories">
                 <h3 class="widget-title">Price Range</h3>
-                <form method="get" class="price-range-slider" data-start-min="250" data-start-max="650" data-min="0" data-max="10000" data-step="1">
+                <form method="get" class="price-range-slider" data-start-min="250" data-start-max="650" data-min="0"
+                  data-max="10000" data-step="1">
                   <div class="ui-range-slider"></div>
                   <footer class="ui-range-slider-footer">
-                    
-                      <div class="ui-range-values">
-                        <div  class="ui-range-value-min">
-                          Ksh <span></span>
-                          <input id="min" type="hidden">
-                        </div> -
-                        <div class="ui-range-value-max">
-                          Ksh <span></span>
-                          <input id="max" type="hidden">
-                        </div>
+
+                    <div class="ui-range-values">
+                      <div class="ui-range-value-min">
+                        Ksh <span></span>
+                        <input id="min" type="hidden">
+                      </div> -
+                      <div class="ui-range-value-max">
+                        Ksh <span></span>
+                        <input id="max" type="hidden">
                       </div>
+                    </div>
                   </footer>
                 </form><!-- .price-range-slider -->
               </div><!-- .widget.widget-categories -->
 
-             
+
               <div class="widget widget-price">
                 <h3 class="widget-title">Price Filter</h3>
                 <ul>
@@ -228,30 +234,30 @@
                 </ul>
               </div>
 
-              
+
               <div class="widget widget-color">
                 <h3 class="widget-title">Color Filter</h3>
                 <ul>
                   <li><a href="#">
-                    <span class="color" style="background-color: #93c4ef;"></span>
-                    Blue
-                  </a></li>
+                      <span class="color" style="background-color: #93c4ef;"></span>
+                      Blue
+                    </a></li>
                   <li><a href="#">
-                    <span class="color" style="background-color: #a7c04d;"></span>
-                    Green
-                  </a></li>
+                      <span class="color" style="background-color: #a7c04d;"></span>
+                      Green
+                    </a></li>
                   <li><a href="#">
-                    <span class="color" style="background-color: #ef0568;"></span>
-                    Red
-                  </a></li>
+                      <span class="color" style="background-color: #ef0568;"></span>
+                      Red
+                    </a></li>
                   <li><a href="#">
-                    <span class="color" style="background-color: #ffce2b;"></span>
-                    Yellow
-                  </a></li>
+                      <span class="color" style="background-color: #ffce2b;"></span>
+                      Yellow
+                    </a></li>
                 </ul>
               </div>
 
-              
+
               <div class="widget widget-tags">
                 <h3 class="widget-title">Popular Tags</h3>
                 <a href="#">Interior</a>
@@ -285,17 +291,18 @@
           </div>
 
           <div class="row">
-            <h4>Featured</h4> <hr>
+            <h4>Featured</h4>
+            <hr>
             {% for i in featured %}
             <div class="col-lg-3 col-md-4 col-sm-6 item_search">
-                
+
               <div class="shop-item">
                 <div class="shop-thumbnail">
                   <a href="{{i.get_absolute_url}}" class="item-link"></a>
                   {% if i.default_image %}
                   <img style="max-height:230px; height:230px;" src="{{i.default_image.url}}" alt="Shop item">
                   {% else %}
-                  <img style="max-height:230px; height:230px;"  src="{% static 'img/default/1.png' %}" alt="Shop item">
+                  <img style="max-height:230px; height:230px;" src="{% static 'img/default/1.png' %}" alt="Shop item">
                   {% endif %}
                   <div class="shop-item-tools">
                     <a href="#" class="add-to-whishlist" data-toggle="tooltip" data-placement="top" title="Wishlist">
@@ -304,7 +311,9 @@
                     <a href="#" class="add-to-cart">
                       <em>Add to Cart</em>
                       <svg x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32">
-                        <path stroke-dasharray="19.79 19.79" stroke-dashoffset="19.79" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" d="M9,17l3.9,3.9c0.1,0.1,0.2,0.1,0.3,0L23,11"/>
+                        <path stroke-dasharray="19.79 19.79" stroke-dashoffset="19.79" fill="none" stroke="#FFFFFF"
+                          stroke-width="2" stroke-linecap="square" stroke-miterlimit="10"
+                          d="M9,17l3.9,3.9c0.1,0.1,0.2,0.1,0.3,0L23,11" />
                       </svg>
                     </a>
                   </div>
@@ -318,120 +327,127 @@
                 </div>
               </div>
             </div>
-            {% endfor %}
-          </div>
-          <hr>
-            
-            <h4>All Products</h4> <hr>
-            {% for i in products %}
-            <div class="col-lg-3 col-md-4 col-sm-6 item_search">
-              <div class="shop-item">
-                <div class="shop-thumbnail">
-                  <a href="{{i.get_absolute_url}}" class="item-link"></a>
-                  {% if i.default_image %}
-                  <img style="max-height:230px; height:230px;" src="{{i.default_image.url}}" alt="Shop item">
-                  {% else %}
-                  <img style="max-height:230px; height:230px;"  src="{% static 'img/default/1.png' %}" alt="Shop item">
-                  {% endif %}
-                  <div class="shop-item-tools">
-                    <a href="#" class="add-to-whishlist" data-toggle="tooltip" data-placement="top" title="Wishlist">
-                      <i style="padding-top:10px;" class="material-icons favorite_border"></i>
-                    </a>
-                    <a href="#" class="add-to-cart">
-                      <em>Add to Cart</em>
-                      <svg x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32">
-                        <path stroke-dasharray="19.79 19.79" stroke-dashoffset="19.79" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" d="M9,17l3.9,3.9c0.1,0.1,0.2,0.1,0.3,0L23,11"/>
-                      </svg>
-                    </a>
-                  </div>
-                </div>
-                <div class="shop-item-details">
-                  <h3 class="shop-item-title"><a href="#">{{i.title}}</a></h3>
-                  <span class="shop-item-price">
-                    <span class="old-price">Ksh</span>
-                    <small> {{i.price}}</small>
-                  </span>
-                </div>
-              </div>
-            </div>
-            {% if not col_class_set %}
-                {% cycle '' '' '' '</div><div class="row">' %}
-            {% endif %}
             {% endfor %}
           </div>
           <hr>
 
-          
-          <div class="pagination padding-bottom">
-            <div class="page-numbers">
-              <a href="#">1</a>
-              <a href="#">2</a>
-              <span class="active">3</span>
-              <a href="#">4</a>
-              <span>...</span>
-              <a href="#">10</a>
+          <h4>All Products</h4>
+          <hr>
+          {% for i in products %}
+          <div class="col-lg-3 col-md-4 col-sm-6 item_search">
+            <div class="shop-item">
+              <div class="shop-thumbnail">
+                <a href="{{i.get_absolute_url}}" class="item-link"></a>
+                {% if i.default_image %}
+                <img style="max-height:230px; height:230px;" src="{{i.default_image.url}}" alt="Shop item">
+                {% else %}
+                <img style="max-height:230px; height:230px;" src="{% static 'img/default/1.png' %}" alt="Shop item">
+                {% endif %}
+                <div class="shop-item-tools">
+                  <a href="#" class="add-to-whishlist" data-toggle="tooltip" data-placement="top" title="Wishlist">
+                    <i style="padding-top:10px;" class="material-icons favorite_border"></i>
+                  </a>
+                  <a href="#" class="add-to-cart">
+                    <em>Add to Cart</em>
+                    <svg x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32">
+                      <path stroke-dasharray="19.79 19.79" stroke-dashoffset="19.79" fill="none" stroke="#FFFFFF"
+                        stroke-width="2" stroke-linecap="square" stroke-miterlimit="10"
+                        d="M9,17l3.9,3.9c0.1,0.1,0.2,0.1,0.3,0L23,11" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+              <div class="shop-item-details">
+                <h3 class="shop-item-title"><a href="#">{{i.title}}</a></h3>
+                <span class="shop-item-price">
+                  <span class="old-price">Ksh</span>
+                  <small> {{i.price}}</small>
+                </span>
+              </div>
             </div>
-            <div class="pager">
-              <a href="#">Prev</a>
-              <span>|</span>
-              <a href="#">Next</a>
-            </div>
+          </div>
+          {% if not col_class_set %}
+          {% cycle '' '' '' '</div><div class="row">' %}
+          {% endif %}
+          {% endfor %}
+        </div>
+        <hr>
+
+
+        <div class="pagination padding-bottom">
+          <div class="page-numbers">
+            <a href="#">1</a>
+            <a href="#">2</a>
+            <span class="active">3</span>
+            <a href="#">4</a>
+            <span>...</span>
+            <a href="#">10</a>
+          </div>
+          <div class="pager">
+            <a href="#">Prev</a>
+            <span>|</span>
+            <a href="#">Next</a>
           </div>
         </div>
       </div>
-    </section>
-    {% endblock %}
-    
-    <footer class="footer">
-      <div class="column">
-        <p class="text-sm">Need support? Call <span class="text-primary">+254 708 808 521</span></p>
-        <div class="social-bar text-center space-bottom">
-          <a href="#" class="sb-skype" data-toggle="tooltip" data-placement="top" title="Skype">
-            <i class="socicon-skype"></i>
-          </a>
-          <a href="#" class="sb-facebook" data-toggle="tooltip" data-placement="top" title="Facebook">
-            <i class="socicon-facebook"></i>
-          </a>
-          <a href="#" class="sb-google-plus" data-toggle="tooltip" data-placement="top" title="" data-original-title="Google+">
-            <i class="socicon-googleplus"></i>
-          </a>
-          <a href="#" class="sb-twitter" data-toggle="tooltip" data-placement="top" title="Twitter">
-            <i class="socicon-twitter"></i>
-          </a>
-          <a href="#" class="sb-instagram" data-toggle="tooltip" data-placement="top" title="" data-original-title="Instagram">
-            <i class="socicon-instagram"></i>
-          </a>
-        </div>
-        {% now "Y" as current_year %}
-        <p class="copyright">&copy; {{ current_year }}. Made by <i class="text-danger material-icons favorite"></i> by Shibatse</p>
-        
+  </div>
+  </section>
+  {% endblock %}
+
+  <footer class="footer">
+    <div class="column">
+      <p class="text-sm">Need support? Call <span class="text-primary">+254 708 808 521</span></p>
+      <div class="social-bar text-center space-bottom">
+        <a href="#" class="sb-skype" data-toggle="tooltip" data-placement="top" title="Skype">
+          <i class="socicon-skype"></i>
+        </a>
+        <a href="#" class="sb-facebook" data-toggle="tooltip" data-placement="top" title="Facebook">
+          <i class="socicon-facebook"></i>
+        </a>
+        <a href="#" class="sb-google-plus" data-toggle="tooltip" data-placement="top" title=""
+          data-original-title="Google+">
+          <i class="socicon-googleplus"></i>
+        </a>
+        <a href="#" class="sb-twitter" data-toggle="tooltip" data-placement="top" title="Twitter">
+          <i class="socicon-twitter"></i>
+        </a>
+        <a href="#" class="sb-instagram" data-toggle="tooltip" data-placement="top" title=""
+          data-original-title="Instagram">
+          <i class="socicon-instagram"></i>
+        </a>
       </div>
-      <div class="column">
-        <h3 class="widget-title">
-          Subscription
-          <small>To receive latest offers and discounts from the shop.</small>
-        </h3>
-        <form action="." class="subscribe-form" novalidate>
-          <input type="email" class="form-control" name="EMAIL" placeholder="Your e-mail">
-          
-          <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_c7103e2c981361a6639545bd5_1194bb7544" tabindex="-1" value=""></div>
-          <button type="submit"><i style="padding-top:8px;" class="material-icons send"></i></button>
-        </form>
-      </div>
-      <div class="column">
-        <h3 class="widget-title">
-          Payment Methods
-          <small>We support one of the following payment methods.</small>
-        </h3>
-        <div class="cards"><img src="{% static 'img/cards.png'%}" alt="Cards"></div>
-        
-        <div class="scroll-to-top-btn"><i class="material-icons trending_flat"></i></div>
-      </div>
-    </footer>
+      {% now "Y" as current_year %}
+      <p class="copyright">&copy; {{ current_year }}. Made by <i class="text-danger material-icons favorite"></i> by
+        Shibatse</p>
+
+    </div>
+    <div class="column">
+      <h3 class="widget-title">
+        Subscription
+        <small>To receive latest offers and discounts from the shop.</small>
+      </h3>
+      <form action="." class="subscribe-form" novalidate>
+        <input type="email" class="form-control" name="EMAIL" placeholder="Your e-mail">
+
+        <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text"
+            name="b_c7103e2c981361a6639545bd5_1194bb7544" tabindex="-1" value=""></div>
+        <button type="submit"><i style="padding-top:8px;" class="material-icons send"></i></button>
+      </form>
+    </div>
+    <div class="column">
+      <h3 class="widget-title">
+        Payment Methods
+        <small>We support one of the following payment methods.</small>
+      </h3>
+      <div class="cards"><img src="{% static 'img/cards.png'%}" alt="Cards"></div>
+
+      <div class="scroll-to-top-btn"><i class="material-icons trending_flat"></i></div>
+    </div>
+  </footer>
 
   </div>
 
- 
+
   <script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
   <script src="{% static 'js/vendor/smoothscroll.js' %}"></script>
   <script src="{% static 'js/vendor/velocity.min.js' %}"></script>
@@ -439,7 +455,8 @@
   <script src="{% static 'js/vendor/icheck.min.js' %}"></script>
   <script src="{% static 'js/vendor/nouislider.min.js' %}"></script>
   <script src="{% static 'js/scripts.js' %}"></script>
-  <script src="{% static 'js/custom.js' %}" ></script>
+  <script src="{% static 'js/custom.js' %}"></script>
 
 </body>
+
 </html>

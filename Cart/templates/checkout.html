@@ -4,51 +4,53 @@
 {% block content %}
 <!-- Container -->
 <div class="row" style="padding-top:20px;">
-    <form action="/Cart/mycart/checkout/commit/" method="post" class="container padding-top-3x padding-bottom-2x">{% csrf_token %}
-      <h1 class="space-top-half">{{title}}</h1>
-      <div class="row padding-top">
+  <form action="/Cart/mycart/checkout/commit/" method="post" class="container padding-top-3x padding-bottom-2x">
+    {% csrf_token %}
+    <h1 class="space-top-half">{{title}}</h1>
+    <div class="row padding-top">
 
-        <!-- Checkout Form -->
-        <div class="col-sm-8 padding-bottom">
-          <div class="row">
-            <div class="col-sm-6">
-              <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First name" required>
-              <input type="email" class="form-control" id="em" name="email" placeholder="Email" required>
-              <input type="text" class="form-control" id="add1" name="address1" placeholder="Address 1" required>
-            </div>
-            <div class="col-sm-6">
-              <input type="text" class="form-control" id="lname" name="lastname" placeholder="Last name" required>
-              <input type="tel" class="form-control" id="phone" name="phone" placeholder="Phone" required>
-              <input type="text" class="form-control" id="add2" name="address2" placeholder="Address 2">
-            </div>
-          </div><!-- .row -->
-          <input type="text" class="form-control" id="co" name="company" placeholder="Company">
-          <div class="row">
-            <div class="col-sm-6">
-              <input type="text" class="form-control" id="county" name="country" placeholder="Country">
-              <input type="text" class="form-control" id="ci" name="city" placeholder="City">
-            </div>
-            <div class="col-sm-6">
-              <input type="text" class="form-control" id="state" name="state" placeholder="State">
-              <input type="text" class="form-control" id="zip" name="zip" placeholder="ZIP code" required>
-            </div>
-          </div><!-- .row -->
-        </div><!-- .col-sm-8 -->
+      <!-- Checkout Form -->
+      <div class="col-sm-8 padding-bottom">
+        <div class="row">
+          <div class="col-sm-6">
+            <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First name" required>
+            <input type="email" class="form-control" id="em" name="email" placeholder="Email" required>
+            <input type="text" class="form-control" id="add1" name="address1" placeholder="Address 1" required>
+          </div>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" id="lname" name="lastname" placeholder="Last name" required>
+            <input type="tel" class="form-control" id="phone" name="phone" placeholder="Phone" required>
+            <input type="text" class="form-control" id="add2" name="address2" placeholder="Address 2">
+          </div>
+        </div><!-- .row -->
+        <input type="text" class="form-control" id="co" name="company" placeholder="Company">
+        <div class="row">
+          <div class="col-sm-6">
+            <input type="text" class="form-control" id="county" name="country" placeholder="Country">
+            <input type="text" class="form-control" id="ci" name="city" placeholder="City">
+          </div>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" id="state" name="state" placeholder="State">
+            <input type="text" class="form-control" id="zip" name="zip" placeholder="ZIP code" required>
+          </div>
+        </div><!-- .row -->
+      </div><!-- .col-sm-8 -->
 
-        <!-- Sidebar -->
-        <div class="col-md-3 col-md-offset-1 col-sm-4 padding-bottom">
-          <aside>
-            <h3>Cart total:</h3>
-            <h4>{{object.currency}} {{object.total}}</h4> 
-            <p class="text-sm text-gray">* Note: This amount includes costs for shipping to address you provided.</p>
-            <a href="{% url 'Cart:MyCart' %}" class="btn btn-default btn-ghost icon-left btn-block">
-              <i class="material-icons arrow_back"></i>
-              Back To Cart
-            </a>
-            <button id="checkout" type="submit" class="btn btn-primary btn-block waves-effect waves-light space-top-none">Checkout</button>
-          </aside>
-        </div><!-- .col-md-3.col-sm-4 -->
-      </div><!-- .row -->
-    </form><!-- .container -->
+      <!-- Sidebar -->
+      <div class="col-md-3 col-md-offset-1 col-sm-4 padding-bottom">
+        <aside>
+          <h3>Cart total:</h3>
+          <h4>{{object.currency}} {{object.total}}</h4>
+          <p class="text-sm text-gray">* Note: This amount includes costs for shipping to address you provided.</p>
+          <a href="{% url 'Cart:MyCart' %}" class="btn btn-default btn-ghost icon-left btn-block">
+            <i class="material-icons arrow_back"></i>
+            Back To Cart
+          </a>
+          <button id="checkout" type="submit"
+            class="btn btn-primary btn-block waves-effect waves-light space-top-none">Checkout</button>
+        </aside>
+      </div><!-- .col-md-3.col-sm-4 -->
+    </div><!-- .row -->
+  </form><!-- .container -->
 </div>
 {% endblock %}
