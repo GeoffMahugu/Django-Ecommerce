@@ -11,7 +11,7 @@ iii. Run local server.
 
 ## Setup the Virtual Environment
 
-Please refere to this  ![documentation](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)to see how to settup a VNV
+Please refere to this  [documentation](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)to see how to settup a VNV
 
 ## Setup the Virtual Environment
 
