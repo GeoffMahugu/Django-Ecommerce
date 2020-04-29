@@ -4,8 +4,8 @@
 <!-- begin #content -->
 <div id="content" class="content">
     <!-- begin breadcrumb -->
-     <ol class="breadcrumb pull-right">
-        <li class="active"> <i class="fa fa-home" ></i> <a href="{% url 'Products:Home' %}">Home</a></li>
+    <ol class="breadcrumb pull-right">
+        <li class="active"> <i class="fa fa-home"></i> <a href="{% url 'Products:Home' %}">Home</a></li>
         <li>
             <i class="fa fa-hand-o-left"></i>
             <a href="{{request.META.HTTP_REFERER}}">Back</a>
@@ -13,37 +13,34 @@
     </ol>
     <!-- end breadcrumb -->
     <!-- begin page-header -->
-    <h1 class="page-header"><i class="fa fa-pencil-square-o"></i>  {{title}} </h1>
+    <h1 class="page-header"><i class="fa fa-pencil-square-o"></i> {{title}} </h1>
     <!-- end page-header -->
-    
-    
+
+
     <!---Start Messages -->
     {% if messages %}
     <div class="row" style="padding:10px;">
-      <div class="col-md-6 col-md-offset-3">
-       {% for message in messages %}
-            {% if message.tags == 'success' %} 
-                <div class="callout callout-info ">
-                    <strong style="padding-left:50px;">  {{ message }}</strong>
-                </div>
-            {% else %} 
-                <div class="callout callout-danger">
-                    <strong  style="padding-left:50px;">{{message}}</strong>
-                </div>
-
+        <div class="col-md-6 col-md-offset-3">
+            {% for message in messages %}
+            {% if message.tags == 'success' %}
+            <div class="callout callout-info ">
+                <strong style="padding-left:50px;"> {{ message }}</strong>
+            </div>
+            {% else %}
+            <div class="callout callout-danger">
+                <strong style="padding-left:50px;">{{message}}</strong>
+            </div>
             {% endif %}
-
-
-        {% endfor %}
-      </div>     
+            {% endfor %}
+        </div>
     </div>
     {% endif %}
 
     <!---End Messages -->
-    
+
     <div class="row ">
-       <div class="container-fluid">
-           
+        <div class="container-fluid">
+
             <div class=" col-md-6 col-md-offset-2 formgroup">
                 <form method="post" enctype="multipart/form-data" {{valid}}>
                     <div class="form-group row">
@@ -51,13 +48,13 @@
                         {% for field in form %}
                         <div class="form-group row">
 
-                            <label class="col-sm-3 form-control-label " > {{ field.label}}</label>
+                            <label class="col-sm-3 form-control-label "> {{ field.label}}</label>
 
                             <div class="col-sm-9">
                                 {{ field }}
 
                                 {% if field.help_text %}
-                                    <p class="help-inline"><small>{{ field.help_text}}</small></p>
+                                <p class="help-inline"><small>{{ field.help_text}}</small></p>
                                 {% endif %}
 
                             </div>
@@ -67,18 +64,13 @@
 
                         <div class="form-actions form-group row">
                             <div class="">
-                              <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
                         </div>
                     </div>
-
-               </form>
+                </form>
             </div>
-
-
-       </div>
+        </div>
     </div>
-
-    
 </div>
 {%endblock%}

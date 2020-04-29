@@ -11,24 +11,24 @@
         <li id="prev00" class="current"><img src="{{objects.default_image.url}}" alt="Product"></li>
         {% for p in vari %}
         <li id="prev{{p.pk}}">
-            {% if p.image %}
-              <img src="{{p.image.url}}" alt="Product">
-            {% else %}
-              <img src="{% static 'img/default/1.png' %}" alt="Shop item">
-            {% endif %}
+          {% if p.image %}
+          <img src="{{p.image.url}}" alt="Product">
+          {% else %}
+          <img src="{% static 'img/default/1.png' %}" alt="Shop item">
+          {% endif %}
         </li>
         {% endfor %}
       </ul><!-- .product-gallery-preview -->
       <!-- Thumblist -->
       <ul class="product-gallery-thumblist">
         {% for v in vari %}
-        <li class="thumb_select" data-price ="{{v.get_price}}" ><a href="#prev{{v.pk}}">
+        <li class="thumb_select" data-price="{{v.get_price}}"><a href="#prev{{v.pk}}">
             {% if v.image %}
-              <img src="{{v.image.url}}" alt="Product">
+            <img src="{{v.image.url}}" alt="Product">
             {% else %}
-              <img src="{% static 'img/default/1.png' %}" alt="Shop item">
+            <img src="{% static 'img/default/1.png' %}" alt="Shop item">
             {% endif %}
-            </a>
+          </a>
         </li>
         {% endfor %}
       </ul><!-- .product-gallery-thumblist -->
@@ -63,33 +63,36 @@
       <div class="product-tools shop-item">
         <div class="count-input">
           <a class="incr-btn" data-action="decrease" href="#">–</a>
-          <input  id="qnt" class="quantity" type="text" value="1">
+          <input id="qnt" class="quantity" type="text" value="1">
           <a class="incr-btn" data-action="increase" href="#">+</a>
         </div><!-- .count-input -->
         <div class="form-element">
           <select class="form-control form-control-sm color-select" id="vari_select">
             {% for i in vari %}
-            <option value="{{i.pk}}" data-image="prev{{i.pk}}" data-price="{{i.get_price}}" >{{i.title}}</option>
+            <option value="{{i.pk}}" data-image="prev{{i.pk}}" data-price="{{i.get_price}}">{{i.title}}</option>
             {% endfor %}
           </select>
         </div><!-- .form-element -->
-        <a  id="add_cart" href="#" class="add-to-cart">
+        <a id="add_cart" href="#" class="add-to-cart">
           <em>Add to Cart</em>
           <svg x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32">
-                        <path stroke-dasharray="19.79 19.79" stroke-dashoffset="19.79" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" d="M9,17l3.9,3.9c0.1,0.1,0.2,0.1,0.3,0L23,11"></path>
-                    </svg>
+            <path stroke-dasharray="19.79 19.79" stroke-dashoffset="19.79" fill="none" stroke="#FFFFFF" stroke-width="2"
+              stroke-linecap="square" stroke-miterlimit="10" d="M9,17l3.9,3.9c0.1,0.1,0.2,0.1,0.3,0L23,11"></path>
+          </svg>
         </a><!-- .add-to-cart -->
       </div><!-- .product-tools -->
       <div class="product-share">
         <span>Share this product: </span>
         <div class="social-bar">
-            <a class="sb-facebook" data-toggle="tooltip" data-placement="top" title="Facebook"  href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">
+          <a class="sb-facebook" data-toggle="tooltip" data-placement="top" title="Facebook"
+            href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">
             <i class="socicon-facebook"></i>
           </a>
           <a href="#" class="sb-twitter" data-toggle="tooltip" data-placement="top" title="Twitter">
             <i class="socicon-twitter"></i>
           </a>
-          <a href="#" class="sb-instagram" data-toggle="tooltip" data-placement="top" title="" data-original-title="Instagram">
+          <a href="#" class="sb-instagram" data-toggle="tooltip" data-placement="top" title=""
+            data-original-title="Instagram">
             <i class="socicon-instagram"></i>
           </a>
         </div>
@@ -114,7 +117,7 @@
         </div>
       </div>
     </div><!-- .tab-pane -->
-    
+
     <div role="tabpanel" class="tab-pane transition fade" id="reviews">
       <!-- Review -->
       {% for i in reviews %}
@@ -125,7 +128,8 @@
         <div class="review-body">
           <div class="review-meta">
             <div class="column">
-              <h4 class="review-title">{{i.caption}}</h4><i class="material-icons schedule"></i> <small>{{i.timestamp|timesince}} ago</small>
+              <h4 class="review-title">{{i.caption}}</h4><i class="material-icons schedule"></i>
+              <small>{{i.timestamp|timesince}} ago</small>
             </div>
             <div class="column">
               <span class="product-rating text-warning">
@@ -144,7 +148,7 @@
                 {% elif i.stars == '3' %}
                 <i class="material-icons star"></i>
                 <i class="material-icons star"></i>
-                  <i class="material-icons star"></i>
+                <i class="material-icons star"></i>
                 <i class="material-icons star_border"></i>
                 <i class="material-icons star_border"></i>
                 {% elif i.stars == '2' %}
@@ -160,7 +164,7 @@
                 <i class="material-icons star_border"></i>
                 <i class="material-icons star_border"></i>
                 {% endif %}
-                
+
               </span>
             </div>
           </div>
@@ -170,7 +174,7 @@
         </div>
       </div><!-- .review -->
       {% endfor %}
-      
+
       <!-- Review -->
       <!-- Reviview Form -->
       <h4 class="padding-top">Leave a review</h4>
@@ -188,24 +192,26 @@
         <div class="col-sm-4">
           <div class="form-element form-select">
             <select class="form-control" name="stars">
-              <option value="5" >5 stars</option>
-              <option value="4" >4 stars</option>
-              <option  value="3" >3 stars</option>
-              <option value="2" >2 stars</option>
-              <option value="1" > 1 star</option>
+              <option value="5">5 stars</option>
+              <option value="4">4 stars</option>
+              <option value="3">3 stars</option>
+              <option value="2">2 stars</option>
+              <option value="1"> 1 star</option>
             </select>
           </div>
         </div>
         <div class="col-sm-12">
-         <div class="form-element">
-            <input type="text" name="caption" placeholder="Caption"n class="form-control">
+          <div class="form-element">
+            <input type="text" name="caption" placeholder="Caption" n class="form-control">
           </div>
           <div class="form-element">
             <textarea rows="8" class="form-control" placeholder="Review*" required name="review"></textarea>
           </div>
           <div class="row">
             <div class="col-lg-3 col-md-4 col-sm-6 col-lg-offset-9 col-md-offset-8 col-sm-offset-6">
-              <button type="submit" class="btn btn-block btn-primary waves-effect waves-light space-top-none space-bottom-none">Leave Review</button>
+              <button type="submit"
+                class="btn btn-block btn-primary waves-effect waves-light space-top-none space-bottom-none">Leave
+                Review</button>
             </div>
           </div>
         </div>
@@ -219,7 +225,7 @@
   <hr>
   <h3 class="padding-top">You May Also Like</h3>
   <div class="row padding-top">
-    
+
     <div class="col-lg-3 col-sm-6">
       <div class="shop-item">
         <div class="shop-thumbnail">
@@ -227,16 +233,19 @@
           {% if i.default_image %}
           <img style="max-height:230px; height:230px;" src="{{i.default_image.url}}" alt="Shop item">
           {% else %}
-          <img style="max-height:230px; height:230px;"  src="{% static 'img/default/1.png' %}" alt="Shop item">
+          <img style="max-height:230px; height:230px;" src="{% static 'img/default/1.png' %}" alt="Shop item">
           {% endif %}
           <div class="shop-item-tools">
-            <a href="{{i.get_absolute_url}}" class="add-to-whishlist" data-toggle="tooltip" data-placement="top" title="Wishlist">
+            <a href="{{i.get_absolute_url}}" class="add-to-whishlist" data-toggle="tooltip" data-placement="top"
+              title="Wishlist">
               <i class="material-icons favorite_border"></i>
             </a>
             <a href="#" class="add-to-cart">
               <em>Add to Cart</em>
               <svg x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32">
-                <path stroke-dasharray="19.79 19.79" stroke-dashoffset="19.79" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" d="M9,17l3.9,3.9c0.1,0.1,0.2,0.1,0.3,0L23,11"/>
+                <path stroke-dasharray="19.79 19.79" stroke-dashoffset="19.79" fill="none" stroke="#FFFFFF"
+                  stroke-width="2" stroke-linecap="square" stroke-miterlimit="10"
+                  d="M9,17l3.9,3.9c0.1,0.1,0.2,0.1,0.3,0L23,11" />
               </svg>
             </a>
           </div>
@@ -249,35 +258,9 @@
         </div>
       </div><!-- .shop-item -->
     </div><!-- .col-lg-3.col-sm-6 -->
-    
+
   </div><!-- .row -->
 </section><!-- .container -->
 {% endfor %}
 
-
-<script src="" type="application/javascript">
-
-//$(document).ready(function(){
-//    alert('hello');
-//    $('#add_cart').click(function(event){
-//        event.preventDefault()
-//        alert('hello');
-//        $.ajax({
-//            url: '/Cart/addcare/',
-//            type: 'post',
-//            data: { 'csrfmiddlewaretoken' : csrftoken, 'payee':payee,'term':term, 'bill_no':bill_no,'bill_date':bill_date,  'currency':currency, 'total':total, 'note':note, 'memo':memo, 'attatchment': attatchment, 'send_':JSON.stringify(send_), 'acc_send_':JSON.stringify(acc_send_) },
-//            
-//            success : function(data) {
-//                alert('Cart item Added');
-//                console.log('success'); 
-//            },
-//
-//            error : function() {
-//                alert('Failed Adding Item to cart');
-//            }
-//
-//        });
-//    });
-//});
-</script>
 {% endblock %}
