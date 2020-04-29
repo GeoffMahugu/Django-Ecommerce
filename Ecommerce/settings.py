@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+
     'Products',
     'Cart',
 ]
@@ -134,13 +134,8 @@ MEDIAFILES_DIRS = [
     os.path.join(BASE_DIR, "static/media"),
 ]
 
-#BRAINTREE SETTINGS
+# BRAINTREE SETTINGS
 BRAINTREE_PUBLIC = 'pjy2h5dnsd479jkp'
-<<<<<<< HEAD
-BRAINTREE_PRIVATE = 'ad94bead175ef756b71b58f06a0c9ac3'
-BRAINTREE_MERCHANT_ID = 'ttbrk7hctb3m6z23'
-=======
 BRAINTREE_PRIVATE = 'Insert Private key Here'
 BRAINTREE_MERCHANT_ID = 'Insert Merchant Id'
->>>>>>> c9579688c9aefcd75e58b028e6322c1c3bc899d6
 BRAINTREE_ENVIRONMENT = 'Sandbox'
